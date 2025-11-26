@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <title>Point relais Mondial Relay</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- Leaflet (carte) -->
+  <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+  <style>
+    html, body {
+      margin: 0;
+      padding: 0;
+      height: 100%;
+      font-family: Arial, sans-serif;
+    }
+    #app {
+      width: 100%;
+      height: 100vh;
+      box-sizing: border-box;
+      padding: 10px;
+    }
+    #Zone_Widget {
+      width: 100%;
+      height: 80vh;
+      margin-bottom: 8px;
+    }
+    #Retour_Widget {
+      width: 100%;
+      padding: 8px;
+      font-size: 14px;
+    }
+  </style>
+</head>
+<body>
+  <div id="app">
+    <h2>Choisissez votre point relais Mondial Relay</h2>
+    <div id="Zone_Widget"></div>
+    <input type="text" id="Retour_Widget" placeholder="Point relais sélectionné">
+  </div>
+
+  <!-- jQuery -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+
+  <!-- Leaflet JS -->
+  <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+
+  <!-- Widget Mondial Relay -->
+  <script src="https://widget.mondialrelay.com/parcelshop-picker/jquery.plugin.mond
