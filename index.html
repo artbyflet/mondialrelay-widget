@@ -5,7 +5,7 @@
   <title>Point relais Mondial Relay</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <!-- Leaflet (carte) -->
+  <!-- Leaflet (carte Mondial Relay) -->
   <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
   <style>
     html, body {
@@ -14,29 +14,76 @@
       height: 100%;
       font-family: Arial, sans-serif;
     }
+
     #app {
       width: 100%;
-      height: 100vh;
-      box-sizing: border-box;
+      height: auto;
       padding: 10px;
+      box-sizing: border-box;
     }
+
     #Zone_Widget {
       width: 100%;
-      height: 80vh;
-      margin-bottom: 8px;
+      height: 70vh;
+      margin-bottom: 10px;
     }
+
     #Retour_Widget {
       width: 100%;
-      padding: 8px;
+      padding: 10px;
+      font-size: 16px;
+      margin-right: 10px;
+      box-sizing: border-box;
+    }
+
+    #copyBtn {
+      padding: 10px 15px;
+      background-color: #cc3366;
+      color: white;
+      border: none;
+      cursor: pointer;
       font-size: 14px;
+      border-radius: 4px;
+      margin-top: 5px;
+    }
+
+    #copyBtn:hover {
+      background-color: #b82d5b;
+    }
+
+    #copyMsg {
+      margin-left: 10px;
+      font-size: 14px;
+      color: green;
+      font-weight: bold;
+    }
+
+    p.info {
+      font-size: 14px;
+      margin-top: 15px;
     }
   </style>
 </head>
+
 <body>
   <div id="app">
     <h2>Choisissez votre point relais Mondial Relay</h2>
+
+    <!-- Widget Mondial Relay -->
     <div id="Zone_Widget"></div>
-    <input type="text" id="Retour_Widget" placeholder="Point relais sélectionné">
+
+    <!-- Zone interaction -->
+    <div style="margin-top:10px;">
+      <input type="text" id="Retour_Widget" placeholder="Point relais sélectionné">
+      <br>
+      <button id="copyBtn" type="button">Copier le point relais</button>
+      <span id="copyMsg"></span>
+    </div>
+
+    <p class="info">
+      Une fois votre point relais choisi, le code sera rempli automatiquement.
+      Cliquez sur « Copier le point relais », puis collez ce code lors du paiement, dans le champ dédié.
+    </p>
   </div>
 
   <!-- jQuery -->
@@ -50,13 +97,40 @@
 
   <script>
     $(document).ready(function () {
+
+      // Initialisation du widget Mondial Relay
       $("#Zone_Widget").MR_ParcelShopPicker({
         Target: "#Retour_Widget",
-        Brand: "CC23JZFS",
+        Brand: "CC23JZFS",   // TON CODE ENSEIGNE
         Country: "FR",
         ShowResultsOnMap: true,
         Responsive: true,
         Theme: "mondialrelay"
+      });
+
+      // Bouton de copie
+      $("#copyBtn").on("click", function () {
+        var val = $("#Retour_Widget").val().trim();
+        var msg = $("#copyMsg");
+
+        if (!val) {
+          msg.text("Sélectionnez d'abord un point relais.");
+          msg.css("color", "red");
+          return;
+        }
+
+        if (navigator.clipboard && navigator.clipboard.writeText) {
+          navigator.clipboard.writeText(val).then(function () {
+            msg.text("Point relais copié ✔");
+            msg.css("color", "green");
+          }).catch(function () {
+            msg.text("Copie impossible. Copiez le code à la main : " + val);
+            msg.css("color", "red");
+          });
+        } else {
+          msg.text("Copie automatique impossible. Copiez le code à la main : " + val);
+          msg.css("color", "red");
+        }
       });
     });
   </script>
