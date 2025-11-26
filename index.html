@@ -46,4 +46,19 @@
   <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
 
   <!-- Widget Mondial Relay -->
-  <script src="https://widget.mondialrelay.com/parcelshop-picker/jquery.plugin.mond
+  <script src="https://widget.mondialrelay.com/parcelshop-picker/jquery.plugin.mondialrelay.parcelshoppicker.min.js"></script>
+
+  <script>
+    $(document).ready(function () {
+      $("#Zone_Widget").MR_ParcelShopPicker({
+        Target: "#Retour_Widget",
+        Brand: "CC23JZFS",
+        Country: "FR",
+        ShowResultsOnMap: true,
+        Responsive: true,
+        Theme: "mondialrelay"
+      });
+    });
+  </script>
+</body>
+</html>
